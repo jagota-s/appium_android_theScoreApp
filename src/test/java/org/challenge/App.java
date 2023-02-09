@@ -1,10 +1,13 @@
 package org.challenge;
 
+import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -19,14 +22,14 @@ public class App extends BaseTest
     public void appium() throws MalformedURLException, InterruptedException {
 
         System.out.println( "Hello World!" );
-        //Thread.sleep(5000);
+
         WebElement getStartedButton = driver.findElement(By.id("com.fivemobile.thescore:id/action_button_text"));
         getStartedButton.click();
-       // Thread.sleep(5000);
+
 
         WebElement league = driver.findElement(By.xpath("//*[@text='NBA Basketball']"));
         league.click();
-       // Thread.sleep(10000);
+
 
         WebElement continue_button = driver.findElement(By.id("com.fivemobile.thescore:id/btn_primary"));
         continue_button.click();
@@ -66,42 +69,39 @@ public class App extends BaseTest
         String teamName = driver.findElement(By.id("com.fivemobile.thescore:id/team_name")).getText();
         Assert.assertEquals(teamName, "Toronto Raptors");
 
+        WebElement scheduletab = driver.findElement(By.xpath("//android.widget.LinearLayout[@content-desc='Schedule']"));
 
-        // WebElement infoTab = driver.findElement(By.xpath("//android.widget.LinearLayout[@content-desc='Info']"));
-        //WebElement infoTab = driver.findElement(AppiumBy.accessibilityId("Info"));
-        //infoTab.click();
+        ((JavascriptExecutor) driver).executeScript("mobile: swipeGesture", ImmutableMap.of(
+                "elementId", ((RemoteWebElement)scheduletab).getId(),
+                "direction", "left",
+                "percent", 1
+        ));
 
-        // swipe to the info tab
-        // //android.widget.LinearLayout[@content-desc="Info"]
-        // accessibility id = Info
-        // click on the above info tab
+        WebElement statsTab = driver.findElement(By.xpath("//android.widget.LinearLayout[contains(@content-desc,'Player Stats')]"));
+        ((JavascriptExecutor) driver).executeScript("mobile: swipeGesture", ImmutableMap.of(
+                "elementId", ((RemoteWebElement)statsTab).getId(),
+                "direction", "left",
+                "percent", 1
+        ));
+
+
+
+         WebElement infoTab = driver.findElement(By.xpath("//android.widget.LinearLayout[@content-desc='Info']"));
+
+        infoTab.click();
+
 
         List<WebElement> infoTextValues = driver.findElements(By.id("com.fivemobile.thescore:id/value"));
         String location = infoTextValues.get(0).getText();
         String arena = infoTextValues.get(1).getText();
 
-        //id = com.fivemobile.thescore:id/value
-        // return the location and arena in this order
-        // assert the values
 
         //press back
         driver.pressKey(new KeyEvent(AndroidKey.BACK));
 
-        // check if you are back on the favorites tab or not
         WebElement favoriteTab = driver.findElement(By.xpath("//android.widget.FrameLayout[@content-desc='Favorites']"));
         String focussed = favoriteTab.getAttribute("focusable");
         Assert.assertEquals(focussed, "true");
-        // //android.widget.FrameLayout[@content-desc="Favorites"]
-        // enabled = true
-        // focusable = true (only for selected value)
 
-
-
-
-
-
-
-
-        ///widget.RecyclerView/android.view.ViewGroup[5]
     }
 }
