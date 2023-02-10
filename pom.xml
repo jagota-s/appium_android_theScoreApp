@@ -29,6 +29,14 @@
       <version>8.3.0</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-support -->
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-support</artifactId>
+      <version>4.2.1</version>
+    </dependency>
+
+
   </dependencies>
   <build>
     <plugins>
