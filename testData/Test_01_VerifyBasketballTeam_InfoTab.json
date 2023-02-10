@@ -1,0 +1,15 @@
+[
+  {
+    "leagueName": "NBA Basketball",
+    "teamName": "Toronto Raptors",
+    "teamLocation": "Toronto",
+    "teamArena": "Scotiabank arena"
+  },
+  {
+    "leagueName": "NBA Basketball",
+    "teamName": "Los Angeles Lakers",
+    "teamLocation": "Los Angeles",
+    "teamArena": "Crypto.com Arena"
+  }
+
+]

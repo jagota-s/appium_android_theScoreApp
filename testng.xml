@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="/Users/sjagota/Documents/Personal/theScore/qaChallenge/theScore">
+        <classes>
+            <class name="org.challenge.Test_01_VerifyBasketballTeam_InfoTab"></class>
+        </classes>
+    </test>
+</suite>
