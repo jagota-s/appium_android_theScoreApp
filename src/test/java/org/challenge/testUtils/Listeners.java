@@ -3,7 +3,6 @@ package org.challenge.testUtils;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
@@ -22,6 +21,7 @@ public class Listeners extends BaseTest implements ITestListener {
     public void onTestStart(ITestResult result) {
         // TODO Auto-generated method stub
         test = extent.createTest(result.getMethod().getMethodName());
+        test.log(Status.INFO, "Test Started");
     }
 
     @Override
@@ -44,7 +44,7 @@ public class Listeners extends BaseTest implements ITestListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+   }
 
     @Override
     public void onTestSkipped(ITestResult result) {
@@ -60,6 +60,7 @@ public class Listeners extends BaseTest implements ITestListener {
 
     @Override
     public void onStart(ITestContext context) {
+
         // TODO Auto-generated method stub
 
     }
@@ -67,6 +68,8 @@ public class Listeners extends BaseTest implements ITestListener {
     @Override
     public void onFinish(ITestContext context) {
         // TODO Auto-generated method stub
+        test.log(Status.INFO, "Test Finished");
         extent.flush();
     }
+
 }

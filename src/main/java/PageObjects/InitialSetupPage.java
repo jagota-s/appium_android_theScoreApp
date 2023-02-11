@@ -8,6 +8,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class InitialSetupPage extends AndroidActions {
 
     AndroidDriver driver;
@@ -48,6 +50,9 @@ public class InitialSetupPage extends AndroidActions {
     @AndroidFindBy(id = "com.fivemobile.thescore:id/dismiss_modal")
     private WebElement dismiss_button;
 
+    @AndroidFindBy(xpath = "//*[@resource-id='com.fivemobile.thescore:id/txt_name']")
+    private List<WebElement> teams;
+
 
     public void clickGetStartedButton() {
         getGetStartedButton.click();
@@ -74,9 +79,9 @@ public class InitialSetupPage extends AndroidActions {
         searchBar.click();
         searchText.sendKeys(teamName);
         Thread.sleep(2000);
-        WebElement team = driver.findElement(By.xpath("//*[contains(@text,'" + teamName + "')]"));
-        if (team != null) {
-            team.click(); // todo click not working wtf
+        if (teams.size()>0) {
+            driver.hideKeyboard();
+            teams.get(0).click();
             continue_teamButton.click();
             return true;
         } else {

@@ -3,7 +3,11 @@ package org.challenge.testCases;
 import PageObjects.TeamPage;
 import PageObjects.FavoritesPage;
 import PageObjects.InitialSetupPage;
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.Status;
 import org.challenge.testUtils.BaseTest;
+import org.challenge.testUtils.ExtentReporter;
+import org.challenge.testUtils.Listeners;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -27,7 +31,7 @@ public class Test_01_VerifyBasketballTeam_InfoTab extends BaseTest
 
 
         FavoritesPage favoritesPage = new FavoritesPage(getDriver());
-        favoritesPage.verifyFavoritesPageDisplayed();
+        Assert.assertTrue(favoritesPage.verifyFavoritesPageDisplayed());
         favoritesPage.clickSelectedTeam();
 
 

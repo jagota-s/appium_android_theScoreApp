@@ -1,5 +1,6 @@
 package PageUtils;
 
+import com.aventstack.extentreports.ExtentReports;
 import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.nativekey.AndroidKey;
@@ -53,7 +54,5 @@ public class AndroidActions {
     public void pressBack(AndroidKey key) {
         driver.pressKey(new KeyEvent(key));
     }
-
-
 
 }
