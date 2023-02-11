@@ -1,10 +1,13 @@
-package org.challenge;
+package org.challenge.testUtils;
 
+import bsh.util.JConsole;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -19,7 +22,7 @@ import java.util.List;
 
 public class BaseTest {
 
-    AndroidDriver driver;
+    public AndroidDriver driver;
 
     @BeforeClass
     public void configureAppium() throws MalformedURLException {
@@ -43,6 +46,10 @@ public class BaseTest {
 
     }
 
+    public AndroidDriver getDriver() {
+        return driver;
+    }
+
     public List<HashMap<String, String>> getJsonData(String className) throws IOException, IOException {
         String filePath = System.getProperty("user.dir") + "//testData//" + className + ".json";
         String jsonContent = FileUtils.readFileToString(new File(filePath), StandardCharsets.UTF_8);
@@ -50,5 +57,15 @@ public class BaseTest {
         List<HashMap<String, String>> data = mapper.readValue(jsonContent, new TypeReference<List<HashMap<String, String>>>() {
         });
         return data;
+    }
+
+    public String getScreenshotPath(String testCaseName, AndroidDriver driver) throws IOException
+    {
+        File source = driver.getScreenshotAs(OutputType.FILE);
+        String path = System.getProperty("user.dir")+"//reports//"+testCaseName+".png";
+        System.out.println("path: :" + path);
+        String destinationFile = System.getProperty("user.dir")+"//reports"+testCaseName+".png";
+        FileUtils.copyFile(source, new File(destinationFile));
+        return destinationFile;
     }
 }

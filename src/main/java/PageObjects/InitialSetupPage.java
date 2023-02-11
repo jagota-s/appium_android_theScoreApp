@@ -1,6 +1,6 @@
 package PageObjects;
 
-import Utills.AndroidActions;
+import PageUtils.AndroidActions;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -76,7 +76,7 @@ public class InitialSetupPage extends AndroidActions {
         Thread.sleep(2000);
         WebElement team = driver.findElement(By.xpath("//*[contains(@text,'" + teamName + "')]"));
         if (team != null) {
-            team.click(); //todo click not working wtf
+            team.click(); // todo click not working wtf
             continue_teamButton.click();
             return true;
         } else {

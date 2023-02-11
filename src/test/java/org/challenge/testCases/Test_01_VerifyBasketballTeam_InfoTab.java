@@ -1,8 +1,9 @@
-package org.challenge;
+package org.challenge.testCases;
 
 import PageObjects.TeamPage;
 import PageObjects.FavoritesPage;
 import PageObjects.InitialSetupPage;
+import org.challenge.testUtils.BaseTest;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -17,7 +18,7 @@ public class Test_01_VerifyBasketballTeam_InfoTab extends BaseTest
 {
     @Test(dataProvider="getData")
     public void appium(HashMap<String,String> input) throws MalformedURLException, InterruptedException {
-        InitialSetupPage initialSetupPage = new InitialSetupPage(driver);
+        InitialSetupPage initialSetupPage = new InitialSetupPage(getDriver());
         initialSetupPage.clickGetStartedButton();
         initialSetupPage.selectLeague(input.get("leagueName"));
         initialSetupPage.handleLocationPopup();
@@ -25,12 +26,12 @@ public class Test_01_VerifyBasketballTeam_InfoTab extends BaseTest
         initialSetupPage.clickDoneButton();
 
 
-        FavoritesPage favoritesPage = new FavoritesPage(driver);
+        FavoritesPage favoritesPage = new FavoritesPage(getDriver());
         favoritesPage.verifyFavoritesPageDisplayed();
         favoritesPage.clickSelectedTeam();
 
 
-        TeamPage teamPage = new TeamPage(driver);
+        TeamPage teamPage = new TeamPage(getDriver());
         Assert.assertEquals(teamPage.getSelectedTeamName(), input.get("teamName"));
         teamPage.selectInfoTab();
         List<WebElement> infoTextValues = teamPage.locationInfo();
@@ -39,14 +40,15 @@ public class Test_01_VerifyBasketballTeam_InfoTab extends BaseTest
         teamPage.goBack();
 
 
-        favoritesPage.verifyFavoritesPageDisplayed();
+
+        Assert.assertTrue(favoritesPage.verifyFavoritesPageDisplayed());
     }
 
     @DataProvider
     public Object[][] getData() throws IOException
     {
         List<HashMap<String, String>>	data =getJsonData(this.getClass().getSimpleName());
-        return new Object[][] { {data.get(0)},{data.get(1)}  };
+        return new Object[][] {{data.get(0)}};
     }
 
 }

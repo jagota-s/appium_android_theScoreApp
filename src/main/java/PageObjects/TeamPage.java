@@ -1,6 +1,6 @@
 package PageObjects;
 
-import Utills.AndroidActions;
+import PageUtils.AndroidActions;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.pagefactory.AndroidFindBy;

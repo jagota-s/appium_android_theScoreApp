@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
-    <test verbose="2" preserve-order="true" name="/Users/sjagota/Documents/Personal/theScore/qaChallenge/theScore">
+    <listeners>
+        <listener class-name="org.challenge.testUtils.Listeners"></listener>
+    </listeners>
+    <test verbose="2" preserve-order="true" name="theScore">
         <classes>
-            <class name="org.challenge.Test_01_VerifyBasketballTeam_InfoTab"></class>
+            <class name="org.challenge.testCases.Test_01_VerifyBasketballTeam_InfoTab"></class>
         </classes>
     </test>
 </suite>
