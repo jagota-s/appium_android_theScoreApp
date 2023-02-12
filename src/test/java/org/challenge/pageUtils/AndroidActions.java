@@ -1,6 +1,5 @@
-package PageUtils;
+package org.challenge.pageUtils;
 
-import com.aventstack.extentreports.ExtentReports;
 import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.nativekey.AndroidKey;

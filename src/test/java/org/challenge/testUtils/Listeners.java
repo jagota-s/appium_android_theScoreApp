@@ -13,7 +13,7 @@ import java.io.IOException;
 public class Listeners extends BaseTest implements ITestListener {
 
     ExtentTest test;
-    ExtentReports extent = ExtentReporter.getReporterObject();
+    ExtentReports extent = ExtentReporter.getInstance();
     AndroidDriver driver;
 
 
@@ -21,7 +21,8 @@ public class Listeners extends BaseTest implements ITestListener {
     public void onTestStart(ITestResult result) {
         // TODO Auto-generated method stub
         test = extent.createTest(result.getMethod().getMethodName());
-        test.log(Status.INFO, "Test Started");
+        ExtentReporter.setTest(test);
+        test.log(Status.INFO, "Test Started in listener");
     }
 
     @Override

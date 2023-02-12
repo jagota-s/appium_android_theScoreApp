@@ -1,6 +1,6 @@
 package org.challenge.testUtils;
 
-import com.aventstack.extentreports.ExtentReports;
+
 import com.aventstack.extentreports.ExtentTest;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,7 +10,6 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,7 +29,9 @@ public class BaseTest {
     private String deviceName;
     private int implicitWait;
 
+    //public ExtentTest test;
     public ExtentTest test;
+    //ExtentReports extent = ExtentReporter.getInstance();
 
     @BeforeClass
     public void configureAppium() throws IOException {
@@ -51,6 +52,7 @@ public class BaseTest {
     @AfterClass
     public void tearDown() {
         System.out.println("In tear down");
+        //extent.flush();
         driver.quit();
         //  service.stop();
 
@@ -86,11 +88,6 @@ public class BaseTest {
         ipAddress = System.getProperty("ipAddress") != null ? System.getProperty("ipAddress") : (String) pro.get("ipAddress");
         port = System.getProperty("port") != null ? System.getProperty("port") : (String) pro.get("port");
         deviceName = System.getProperty("AndroidDeviceName") != null ? System.getProperty("AndroidDeviceName") : (String) pro.get("AndroidDeviceName");
-        // implicitWait = Integer.valueOf((String) pro.get("implicitWait"));
     }
 
-    @BeforeMethod
-    public void setTest(){
-
-    }
 }

@@ -1,9 +1,11 @@
-package PageObjects;
+package org.challenge.pageObjects;
 
-import PageUtils.AndroidActions;
+import com.aventstack.extentreports.Status;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import org.challenge.pageUtils.AndroidActions;
+import org.challenge.testUtils.ExtentReporter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -55,6 +57,7 @@ public class InitialSetupPage extends AndroidActions {
 
 
     public void clickGetStartedButton() {
+        ExtentReporter.getTest().log(Status.INFO, "Clicking started button from withing the pageobject");
         getGetStartedButton.click();
     }
 

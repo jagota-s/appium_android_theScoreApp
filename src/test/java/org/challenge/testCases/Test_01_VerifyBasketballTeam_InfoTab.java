@@ -1,13 +1,9 @@
 package org.challenge.testCases;
 
-import PageObjects.TeamPage;
-import PageObjects.FavoritesPage;
-import PageObjects.InitialSetupPage;
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.Status;
+import org.challenge.pageObjects.FavoritesPage;
+import org.challenge.pageObjects.InitialSetupPage;
+import org.challenge.pageObjects.TeamPage;
 import org.challenge.testUtils.BaseTest;
-import org.challenge.testUtils.ExtentReporter;
-import org.challenge.testUtils.Listeners;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -21,7 +17,7 @@ import java.util.List;
 public class Test_01_VerifyBasketballTeam_InfoTab extends BaseTest
 {
     @Test(dataProvider="getData")
-    public void appium(HashMap<String,String> input) throws MalformedURLException, InterruptedException {
+    public void Test_01_VerifyBasketballTeam_InfoTab(HashMap<String,String> input) throws MalformedURLException, InterruptedException {
         InitialSetupPage initialSetupPage = new InitialSetupPage(getDriver());
         initialSetupPage.clickGetStartedButton();
         initialSetupPage.selectLeague(input.get("leagueName"));
