@@ -19,6 +19,7 @@ public class ExtentReporter {
             extent = new ExtentReports();
             extent.attachReporter(reporter);
             extent.setSystemInfo("Tester", "Sumit Jagota");
+            extent.setSystemInfo("Operating System", System.getProperty("os.name"));
 
         }
         return extent;

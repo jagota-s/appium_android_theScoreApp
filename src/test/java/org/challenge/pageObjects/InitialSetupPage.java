@@ -57,11 +57,12 @@ public class InitialSetupPage extends AndroidActions {
 
 
     public void clickGetStartedButton() {
-        ExtentReporter.getTest().log(Status.INFO, "Clicking started button from withing the pageobject");
+        ExtentReporter.getTest().log(Status.INFO, "Clicking 'Get Started' button");
         getGetStartedButton.click();
     }
 
     public boolean selectLeague(String leagueName) {
+        ExtentReporter.getTest().log(Status.INFO, "Selecting the league: " + leagueName);
         WebElement league = driver.findElement(By.xpath("//*[@text='" + leagueName + "']"));
         if (league != null) {
             league.click();
@@ -73,16 +74,19 @@ public class InitialSetupPage extends AndroidActions {
     }
 
     public void handleLocationPopup() {
+
         if (location_popup != null && location_popup.isDisplayed()) {
+            ExtentReporter.getTest().log(Status.INFO, "Dismiss the location popup");
             deny_button.click();
         }
     }
 
     public boolean selectTeam(String teamName) throws InterruptedException {
+        ExtentReporter.getTest().log(Status.INFO, "Selecting the Team: " + teamName);
         searchBar.click();
         searchText.sendKeys(teamName);
         Thread.sleep(2000);
-        if (teams.size()>0) {
+        if (teams.size() > 0) {
             driver.hideKeyboard();
             teams.get(0).click();
             continue_teamButton.click();
@@ -93,12 +97,14 @@ public class InitialSetupPage extends AndroidActions {
     }
 
     public void clickDoneButton() {
+        ExtentReporter.getTest().log(Status.INFO, "Clicking on 'Done' button.");
         done_button.click();
         handleAdModalPopUp();
     }
 
     private void handleAdModalPopUp() {
         if (download_button != null && download_button.isDisplayed()) {
+            ExtentReporter.getTest().log(Status.INFO, "Dismiss the 'Download app' popup");
             dismiss_button.click();
         }
     }

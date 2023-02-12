@@ -2,6 +2,7 @@ package org.challenge.testUtils;
 
 
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.appium.java_client.android.AndroidDriver;
@@ -27,11 +28,6 @@ public class BaseTest {
     private String ipAddress;
     private String port;
     private String deviceName;
-    private int implicitWait;
-
-    //public ExtentTest test;
-    public ExtentTest test;
-    //ExtentReports extent = ExtentReporter.getInstance();
 
     @BeforeClass
     public void configureAppium() throws IOException {
@@ -42,20 +38,18 @@ public class BaseTest {
         loadProperties();
         UiAutomator2Options options = new UiAutomator2Options();
         options.setDeviceName(deviceName);
-        options.setApp(System.getProperty("user.dir") +"//src//test//resources//theScore.apk");
+        options.setApp(System.getProperty("user.dir") + "//src//test//resources//theScore.apk");
 
         //driver = new AndroidDriver(new URL("http://0.0.0.0:4723"), options);
-        driver = new AndroidDriver(new URL(ipAddress+ ":" +port), options);
+        driver = new AndroidDriver(new URL(ipAddress + ":" + port), options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
 
     @AfterClass
     public void tearDown() {
         System.out.println("In tear down");
-        //extent.flush();
         driver.quit();
         //  service.stop();
-
     }
 
     public AndroidDriver getDriver() {
@@ -71,19 +65,18 @@ public class BaseTest {
         return data;
     }
 
-    public String getScreenshotPath(String testCaseName, AndroidDriver driver) throws IOException
-    {
+    public String getScreenshotPath(String testCaseName, AndroidDriver driver) throws IOException {
         File source = driver.getScreenshotAs(OutputType.FILE);
-        String path = System.getProperty("user.dir")+"/reports//"+testCaseName+".png";
+        String path = System.getProperty("user.dir") + "/reports//" + testCaseName + ".png";
         System.out.println("path: :" + path);
-        String destinationFile = System.getProperty("user.dir")+"//reports//"+testCaseName+".png";
+        String destinationFile = System.getProperty("user.dir") + "//reports//" + testCaseName + ".png";
         FileUtils.copyFile(source, new File(destinationFile));
         return destinationFile;
     }
 
     public void loadProperties() throws IOException {
         Properties pro = new Properties();
-        FileInputStream fi = new FileInputStream(System.getProperty("user.dir")+"//data.properties");
+        FileInputStream fi = new FileInputStream(System.getProperty("user.dir") + "//data.properties");
         pro.load(fi);
         ipAddress = System.getProperty("ipAddress") != null ? System.getProperty("ipAddress") : (String) pro.get("ipAddress");
         port = System.getProperty("port") != null ? System.getProperty("port") : (String) pro.get("port");
