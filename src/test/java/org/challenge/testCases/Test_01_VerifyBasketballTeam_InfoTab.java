@@ -1,6 +1,7 @@
 package org.challenge.testCases;
 
 import com.aventstack.extentreports.Status;
+import io.appium.java_client.android.AndroidDriver;
 import org.challenge.pageObjects.FavoritesPage;
 import org.challenge.pageObjects.WelcomePage;
 import org.challenge.pageObjects.TeamPage;
@@ -19,6 +20,7 @@ public class Test_01_VerifyBasketballTeam_InfoTab extends BaseTest {
     public static final String LEAGUE_NAME = "leagueName";
     public static final String TEAM_LOCATION = "teamLocation";
     public static final String TEAM_ARENA = "teamArena";
+    public static AndroidDriver driver;
 
     @Test(dataProvider = "getData")
     public void Test_01_VerifyBasketballTeam_InfoTab(HashMap<String, String> inputData) {
@@ -48,6 +50,7 @@ public class Test_01_VerifyBasketballTeam_InfoTab extends BaseTest {
     public Object[][] getData() {
         try {
             List<HashMap<String, String>> data = getJsonData(this.getClass().getSimpleName());
+            driver = getDriver();
             return new Object[][]{{data.get(0)}};
         } catch (IOException e) {
             ExtentReporter.getTest().log(Status.ERROR, "Unable to read the data from test data JSON file. " + e.getMessage());
