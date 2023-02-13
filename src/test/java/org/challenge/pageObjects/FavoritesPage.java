@@ -11,20 +11,18 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 public class FavoritesPage extends AndroidActions {
-    AndroidDriver driver;
-
-    public FavoritesPage(AndroidDriver driver) {
-        super(driver);
-        this.driver = driver;
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-    }
-
+    private AndroidDriver driver;
     @AndroidFindBy(xpath = "//android.widget.FrameLayout[@content-desc='Favorites']")
     private WebElement favoriteTab;
 
     @AndroidFindBy(id = "com.fivemobile.thescore:id/icon_team_logo")
     private WebElement selectedTeam;
 
+    public FavoritesPage(AndroidDriver driver) {
+        super(driver);
+        this.driver = driver;
+        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+    }
 
     public void verifyFavoritesPageDisplayed() {
         String focussed = favoriteTab.getAttribute("focusable");

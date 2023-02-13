@@ -12,15 +12,9 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class InitialSetupPage extends AndroidActions {
+public class WelcomePage extends AndroidActions {
 
-    AndroidDriver driver;
-
-    public InitialSetupPage(AndroidDriver driver) {
-        super(driver);
-        this.driver = driver;
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-    }
+    private AndroidDriver driver;
 
     @AndroidFindBy(id = "com.fivemobile.thescore:id/action_button_text")
     private WebElement getGetStartedButton;
@@ -55,6 +49,16 @@ public class InitialSetupPage extends AndroidActions {
     @AndroidFindBy(xpath = "//*[@resource-id='com.fivemobile.thescore:id/txt_name']")
     private List<WebElement> teams;
 
+    @AndroidFindBy(id = "com.fivemobile.thescore:id/accept_button")
+    private WebElement ccpa_continue_button;
+
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Privacy Policy\"]")
+    private WebElement ccpa_privacy_policy;
+    public WelcomePage(AndroidDriver driver) {
+        super(driver);
+        this.driver = driver;
+        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+    }
 
     public void clickGetStartedButton() {
         ExtentReporter.getTest().log(Status.INFO, "Clicking 'Get Started' button");
@@ -81,11 +85,11 @@ public class InitialSetupPage extends AndroidActions {
         }
     }
 
-    public boolean selectTeam(String teamName) throws InterruptedException {
+    public boolean selectTeam(String teamName) {
         ExtentReporter.getTest().log(Status.INFO, "Selecting the Team: " + teamName);
         searchBar.click();
         searchText.sendKeys(teamName);
-        Thread.sleep(2000);
+        // Thread.sleep(2000); // todo
         if (teams.size() > 0) {
             driver.hideKeyboard();
             teams.get(0).click();
@@ -98,14 +102,33 @@ public class InitialSetupPage extends AndroidActions {
 
     public void clickDoneButton() {
         ExtentReporter.getTest().log(Status.INFO, "Clicking on 'Done' button.");
+
         done_button.click();
         handleAdModalPopUp();
     }
 
     private void handleAdModalPopUp() {
-        if (download_button != null && download_button.isDisplayed()) {
-            ExtentReporter.getTest().log(Status.INFO, "Dismiss the 'Download app' popup");
-            dismiss_button.click();
+        waitForElement(driver, download_button);
+        try {
+            if (download_button.isDisplayed()) {
+                ExtentReporter.getTest().log(Status.INFO, "Dismiss the 'Download app' popup");
+                dismiss_button.click();
+            }
+        } catch (Exception e) {
+            ExtentReporter.getTest().log(Status.INFO, "theBet download popup not displayed");
+        }
+    }
+
+    public void handleCcpaModal() {
+
+        try {
+            waitForElement(driver, ccpa_continue_button);
+            if(ccpa_privacy_policy.isDisplayed()) {
+                ccpa_continue_button.click();
+                clickGetStartedButton();
+            }
+        } catch (Exception e) {
+            ExtentReporter.getTest().log(Status.INFO, "CCPA screen not displayed");
         }
     }
 

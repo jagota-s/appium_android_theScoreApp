@@ -1,12 +1,18 @@
 package org.challenge.pageUtils;
 
+import com.aventstack.extentreports.Status;
 import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
+import org.challenge.testUtils.ExtentReporter;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebElement;
+import org.openqa.selenium.support.ui.FluentWait;
+
+import java.time.Duration;
 
 public class AndroidActions {
 
@@ -53,5 +59,21 @@ public class AndroidActions {
     public void pressBack(AndroidKey key) {
         driver.pressKey(new KeyEvent(key));
     }
+
+    public void waitForElement(AndroidDriver driver, WebElement element) {
+        FluentWait<AndroidDriver> wait = new FluentWait<AndroidDriver>(driver)
+                .withTimeout(Duration.ofSeconds(10))
+                .pollingEvery(Duration.ofSeconds(2))
+                .ignoring(NoSuchElementException.class);
+
+        try {
+            wait.until(d -> element.isDisplayed());
+        } catch (Exception e) {
+            // ExtentReporter.getTest().log(Status.INFO, "");
+            System.out.println(e.getMessage());
+        }
+    }
+
+
 
 }

@@ -57,7 +57,11 @@
       <version>4.1.3</version>
     </dependency>
   </dependencies>
-  <!--  mvn test -PRegression -->
+  <!--  mvn test -PRegression-->
+<!--  mvn clean install -DipAddress= -Dport= -DdeviceName= -->
+<!--  mvn clean install -DrunTimeEnv=cloud -->
+
+
   <profiles>
     <profile>
       <id>Regression</id>

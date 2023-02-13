@@ -15,14 +15,7 @@ import java.util.List;
 
 public class TeamPage extends AndroidActions {
 
-    AndroidDriver driver;
-
-    public TeamPage(AndroidDriver driver) {
-        super(driver);
-        this.driver = driver;
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-    }
-
+    private AndroidDriver driver;
     @AndroidFindBy(id = "com.fivemobile.thescore:id/team_name")
     private WebElement teamName;
 
@@ -38,6 +31,11 @@ public class TeamPage extends AndroidActions {
     @AndroidFindBy(xpath = "//android.widget.LinearLayout[contains(@content-desc,'Player Stats')]")
     private WebElement playerStatsTab;
 
+    public TeamPage(AndroidDriver driver) {
+        super(driver);
+        this.driver = driver;
+        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+    }
 
     public String getTeamName() {
         return teamName.getText();
