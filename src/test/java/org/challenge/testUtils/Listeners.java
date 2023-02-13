@@ -19,7 +19,6 @@ public class Listeners extends BaseTest implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult result) {
-        // TODO Auto-generated method stub
         test = extent.createTest(result.getMethod().getMethodName());
         ExtentReporter.setTest(test);
         test.log(Status.INFO, "Test Started in listener");
@@ -27,7 +26,6 @@ public class Listeners extends BaseTest implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        // TODO Auto-generated method stub
         test.log(Status.PASS, "Test Passed");
     }
 
@@ -37,38 +35,26 @@ public class Listeners extends BaseTest implements ITestListener {
         try{
             driver = (AndroidDriver) result.getTestClass().getRealClass().getField("driver")
                     .get(result.getInstance());
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
             test.addScreenCaptureFromPath(getScreenshotPath(result.getMethod().getMethodName(), driver));
-        } catch (IOException e) {
-            e.printStackTrace();
+        }catch (Exception e) {
+            test.log(Status.ERROR,"Error in screenshot utility "+ e.getMessage());
         }
    }
 
     @Override
     public void onTestSkipped(ITestResult result) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void onStart(ITestContext context) {
-
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void onFinish(ITestContext context) {
-        // TODO Auto-generated method stub
         test.log(Status.INFO, "Test Finished");
         extent.flush();
     }
