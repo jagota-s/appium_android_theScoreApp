@@ -35,6 +35,12 @@ Before running the tests, make sure that you have installed all the required com
 
 - src/test/java: This folder contains the test classes that define the test cases for the automation scripts.
 
+- src/test/resources : This folder contains the .apk file for the application under test.
+
+- testData/ : This folder contains the .json file for the test which can be used to pass desired test data values to the test.
+
+- data.properties: This file contains the values for appium server configuration. 
+
 The page objects in this repository are classes that represent the various pages or screens in the TheScore Android app. They contain methods that perform actions on the app, such as clicking a button or entering text into a field. The test classes use the methods from the page objects to interact with the app and perform the tests.
 
 # Running the Scripts in the local environment 
@@ -54,13 +60,13 @@ mvn install
 ```
 mvn clean install -PRegression -DipAddress= -Dport= -DdeviceName= 
 ```
-- Test report will be generated in the ./reports folder
+- Test report will be generated in the /reports folder
 
 # Running the Scripts in the Saucelabs
  ```
 mvn clean install -PRegression -DrunTimeEnv=cloud
 ```
-- Test report will be generated in the ./reports folder
+- Test report will be generated in the /reports folder
 
 
 
