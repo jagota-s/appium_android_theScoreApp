@@ -40,8 +40,8 @@ Before running the tests, make sure that you have installed all the required com
 - data.properties: This file contains the values for appium server configuration.
 
 - reports: Extent reports generated will be placed here with their screenshots (in case of failure)
-  * [Sample Pass report]()
-  * [Sample Fail report]()
+  * [Sample Pass report](https://github.com/jagota-s/appium_android_theScoreApp/blob/main/reports/index_Pass_Sample.html)
+  * [Sample Fail report](https://github.com/jagota-s/appium_android_theScoreApp/blob/main/reports/index_Fail.html)
 
 The page objects in this repository are classes that represent the various pages or screens in the TheScore Android app. They contain methods that perform actions on the app, such as clicking a button or entering text into a field. The test classes use the methods from the page objects to interact with the app and perform the tests.
 
