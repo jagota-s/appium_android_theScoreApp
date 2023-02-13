@@ -52,13 +52,13 @@ mvn install
 - Ip address, Port number of the server, and device name of the virtual device initialized in the previous step.
 - Run the below maven command with parameters identified in previous steps:
 ```
-mvn clean install -DipAddress= -Dport= -DdeviceName= 
+mvn clean install -PRegression -DipAddress= -Dport= -DdeviceName= 
 ```
 - Test report will be generated in the ./reports folder
 
 # Running the Scripts in the Saucelabs
  ```
-mvn clean install -DrunTimeEnv=cloud
+mvn clean install -PRegression -DrunTimeEnv=cloud
 ```
 - Test report will be generated in the ./reports folder
 
