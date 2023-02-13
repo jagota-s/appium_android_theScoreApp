@@ -25,6 +25,7 @@ public class FavoritesPage extends AndroidActions {
     }
 
     public void verifyFavoritesPageDisplayed() {
+        waitForElement(driver, favoriteTab);
         String focussed = favoriteTab.getAttribute("focusable");
         boolean isDisplayed = focussed.equals("true");
         if (isDisplayed) {
@@ -37,6 +38,7 @@ public class FavoritesPage extends AndroidActions {
 
     public void clickSelectedTeam() {
         ExtentReporter.getTest().log(Status.INFO, "Clicking on the selected team logo");
+        waitForElement(driver, selectedTeam);
         selectedTeam.click();
     }
 

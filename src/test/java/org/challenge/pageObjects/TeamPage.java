@@ -43,8 +43,10 @@ public class TeamPage extends AndroidActions {
 
     public void selectInfoTab() {
         ExtentReporter.getTest().log(Status.INFO, "Navigating to the 'Info' tab");
+        waitForElement(driver, scheduleTab);
         this.swipe(scheduleTab, "left");
         this.swipe(playerStatsTab, "left");
+        waitForElement(driver, infoTab);
         infoTab.click();
     }
 

@@ -102,7 +102,7 @@ public class WelcomePage extends AndroidActions {
 
     public void clickDoneButton() {
         ExtentReporter.getTest().log(Status.INFO, "Clicking on 'Done' button.");
-
+        waitForElement(driver, done_button);
         done_button.click();
         handleAdModalPopUp();
     }
